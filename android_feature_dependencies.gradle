@@ -1,0 +1,35 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../../android_base.gradle'
+
+dependencies {
+
+    //Android
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.lib_versions.appcompat"
+    implementation "androidx.core:core-ktx:$rootProject.ext.lib_versions.core"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.ext.lib_versions.fragment_ktx"
+    implementation "androidx.activity:activity-ktx:$rootProject.ext.lib_versions.activity_ktx"
+    implementation "com.google.android.material:material:$rootProject.ext.lib_versions.material"
+
+//    // Google Architecture Component
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lib_versions.lifecycle"
+//    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lib_versions.lifecycle"
+//    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.ext.lib_versions.lifecycle"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.ext.lib_versions.lifecycle"
+//    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.ext.lib_versions.lifecycle"
+//    implementation "androidx.lifecycle:lifecycle-process:$rootProject.ext.lib_versions.lifecycle_process"
+
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.lib_versions.constraint"
+    implementation "androidx.core:core-ktx:$rootProject.ext.lib_versions.core"
+    implementation "androidx.dynamicanimation:dynamicanimation:$rootProject.ext.lib_versions.dynamicanimation"
+    implementation "androidx.annotation:annotation:$rootProject.ext.lib_versions.annotation"
+
+    //For Load Image
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.lib_versions.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.ext.lib_versions.glide"
+
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+
+    implementation "androidx.exifinterface:exifinterface:$rootProject.ext.lib_versions.exifinterface"
+}

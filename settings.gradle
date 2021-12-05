@@ -1,0 +1,19 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "Smart-Lottery"
+include ':app'
+include ':data:local'
+include ':data:remote'
+include ':domain'
+include ':common'
+include ':data:repository'
+include ':core'
+include ':features:auth'
+include ':navigation'
+include ':features:home'

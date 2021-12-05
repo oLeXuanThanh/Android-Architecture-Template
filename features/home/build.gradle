@@ -1,0 +1,9 @@
+plugins {
+    id 'com.android.library'
+}
+apply from: '../../android_feature_dependencies.gradle'
+
+
+dependencies {
+    implementation project(':core')
+}

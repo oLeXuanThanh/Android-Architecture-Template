@@ -1,0 +1,131 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+apply from: '../android_base.gradle'
+//apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+
+    defaultConfig {
+        applicationId rootProject.ext.eng_app_id
+
+        archivesBaseName = "app-$versionName"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.ext.keystore_store_file
+            storePassword rootProject.ext.keystore_store_password
+            keyAlias rootProject.ext.keystore_key_alias
+            keyPassword rootProject.ext.keystore_key_password
+        }
+//        debug {
+//            storeFile file("../debug.keystore")
+//            storePassword 'android'
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'android'
+//        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+//            signingConfig signingConfigs.debug
+            ext.alwaysUpdateBuildId = false
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
+            signingConfig signingConfigs.debug
+
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+            crunchPngs false
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                mappingFileUploadEnabled true
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+
+kapt {
+    useBuildCache true
+    correctErrorTypes true
+}
+
+dependencies {
+    implementation project(':core')
+
+    implementation project(":data:local")
+    implementation project(":data:remote")
+    implementation project(":data:repository")
+
+    implementation project(":features:auth")
+    implementation project(":features:home")
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation "com.google.android.material:material:$rootProject.ext.lib_versions.material"
+
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.lib_versions.appcompat"
+
+    implementation platform("com.google.firebase:firebase-bom:$rootProject.ext.lib_versions.firebase_boom")
+    implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-functions-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Google FirebaseUI
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.0'
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
+
+    implementation "androidx.work:work-runtime-ktx:$rootProject.ext.lib_versions.work_version"
+    implementation "androidx.hilt:hilt-work:$rootProject.ext.lib_versions.hiltAndroidxVersion"
+
+}

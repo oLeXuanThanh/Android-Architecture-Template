@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="grid_columns">4</integer>
+
+    <integer name="grid_columns_card_history_detail">4</integer>
+
+    <item name="choose_spread_ratio_width_scale" format="integer" type="integer">960</item>
+    <item name="choose_spread_span_count" format="integer" type="integer">3</item>
+    <bool name="is_tablet">true</bool>
+</resources>
